@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "90614eda-7508-4b5a-a4ce-3b11b2fc57ac",
+		"name": "MeetingPlannerApi/roomTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34556504"
+	},
+	"item": [
+		{
+			"name": "roomTest",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Salle E1002\",\r\n    \"capacity\": 10,\r\n    \"closeTime\": \"20:00:00\",\r\n    \"openTime\": \"08:00:00\",\r\n    \"availability\": true,\r\n    \"equipment\": [\r\n        {\r\n            \"name\": \"ECRAN 60 pouces\",\r\n            \"description\": \"Equipements de qualitée supérieure et idéale pour les images HD\",\r\n            \"equipmentType\": \"ECRAN\"\r\n        }\r\n    ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/addRoom",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"addRoom"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomTest",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Salle E1001\",\r\n    \"capacity\": 23,\r\n    \"closeTime\": \"20:00:00\",\r\n    \"openTime\": \"08:00:00\",\r\n    \"availability\": true,\r\n    \"equipment\": [\r\n        {\r\n            \"name\": \"AUCUN Modifié\",\r\n            \"description\": \"Aucun équipement requis\",\r\n            \"equipmentType\": \"NEANT\"\r\n        }\r\n    ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/updateRoom/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"updateRoom",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomTest",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/deleteRoom/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"deleteRoom",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "roomTest",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/allRoom",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"allRoom"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

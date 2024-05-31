@@ -1,0 +1,69 @@
+{
+	"info": {
+		"_postman_id": "165beb5e-921f-4fc8-8389-e52a20ba4cef",
+		"name": "MeetingPlannerApi/reservationTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34556504"
+	},
+	"item": [
+		{
+			"name": "reservationTest",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"room\": {\r\n    \"id\": 1,\r\n    \"name\": \"Salle E1001\",\r\n    \"capacity\": 23,\r\n    \"closeTime\": \"20:00:00\",\r\n    \"openTime\": \"08:00:00\",\r\n    \"availability\": true,\r\n    \"equipment\":[\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"AUCUN\",\r\n            \"description\": \"Aucun équipements réquis pour cette salle\",\r\n            \"equipmentType\": \"NEANT\"\r\n        }\r\n    ]\r\n  },\r\n  \"meeting\": {\r\n    \"id\": 1,\r\n    \"name\": \"Reunion portant sur le marché des Finances\",\r\n    \"startTime\": \"09:00:00\",\r\n    \"endTime\": \"10:00:00\",\r\n    \"meetingDate\": \"2024-05-30T00:00:00.000+00:00\",\r\n    \"numberOfpeople\": 8,\r\n    \"meetingType\": \"RS\"\r\n  }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/reserveRoom",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reserveRoom"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reservationTest",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/reservations",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"reservations"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
