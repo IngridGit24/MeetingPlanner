@@ -9,6 +9,8 @@ import com.planning.demomeetingplanner.Model.Room;
 import com.planning.demomeetingplanner.Repository.RepoEquipment;
 import com.planning.demomeetingplanner.Repository.RepoMeeting;
 import com.planning.demomeetingplanner.Repository.RepoRoom;
+import com.planning.demomeetingplanner.Service.ReservationRequestService;
+import com.planning.demomeetingplanner.Service.ReservationService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +36,12 @@ public class ManageController {
 
     @Autowired
     public RepoEquipment repoEquipment;
+
+    private final ReservationService reservationService;
+    @Autowired
+    public ManageController(ReservationService reservationService) {
+        this.reservationService = reservationService;
+    }
 
 
     //let's start with Room operations CRUD
@@ -156,7 +164,7 @@ public class ManageController {
     }
 
 
-    //Now let's make some methods for Meeting
+    //Now let's make some methods for Meeting CRUD
     @PostMapping("/addMeetingOrder")
     public Boolean meetingOrder(@RequestBody Meeting meeting){
         try{
@@ -231,7 +239,34 @@ public class ManageController {
     }
 
 
+    //Now let's call reservation service and implements some method
+    @PostMapping("/reserveRoom")
+    public ResponseEntity<?> reserveRoom(@RequestBody ReservationRequestService reservationRequestService) {
+        try {
+            Room room = reservationRequestService.getRoom();
+            Meeting meeting = reservationRequestService.getMeeting();
+            if(repoRoom.existsById(room.getId())) {
+                boolean reservationStatus = reservationService.reserveRoom(room, meeting);
+                if(reservationStatus) {
+                    return ResponseEntity.ok().body("La salle a été réservée avec succès.");
+                } else {
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("La réservation de la salle a échoué pour une raison inconnue");
+                }
+            } else {
+                throw new NotFoundObject("Cette salle est introuvable dans notre liste de salles disponible");
+            }
+        } catch (NotFoundObject e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 
-
+    @GetMapping("/reservations")
+    public ResponseEntity<?> displayReservations() {
+        List<Room> reservations = repoRoom.findAllByAvailability(false);
+        if (reservations.isEmpty()) {
+            throw new NotFoundObject("Aucune réservation n'a été trouvée.");
+        }
+        return ResponseEntity.ok(reservations);
+    }
 
 }
